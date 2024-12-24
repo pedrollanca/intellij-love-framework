@@ -8,11 +8,10 @@
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
+    <!-- File type -->
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.pedrollanca.intellijloveframework.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <completion.contributor order="first" language="any" implementationClass="com.pedrollanca.intellijloveframework.LoveCompletionContributor"/>
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.pedrollanca.intellijloveframework.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
+
 </idea-plugin>
