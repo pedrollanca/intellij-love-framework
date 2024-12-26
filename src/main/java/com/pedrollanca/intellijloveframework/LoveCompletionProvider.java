@@ -53,26 +53,30 @@ public class LoveCompletionProvider extends CompletionProvider<CompletionParamet
                                   @NotNull ProcessingContext processingContext,
                                   @NotNull CompletionResultSet completionResultSet) {
 
-        Editor editor = completionParameters.getEditor();
-        Document document = editor.getDocument();
-        int offset = completionParameters.getOffset();
+        try {
+            Editor editor = completionParameters.getEditor();
+            Document document = editor.getDocument();
+            int offset = completionParameters.getOffset();
 
-        int lineStartOffset = document.getLineStartOffset(document.getLineNumber(offset));
-        String lineText = document.getText().substring(lineStartOffset, offset).trim();
+            int lineStartOffset = document.getLineStartOffset(document.getLineNumber(offset));
+            String lineText = document.getText().substring(lineStartOffset, offset).trim();
 
-        Matcher matcher = LOVE_LINE_PATTERN.matcher(lineText);
+            Matcher matcher = LOVE_LINE_PATTERN.matcher(lineText);
 
-        if (matcher.matches()) {
-            String moduleOrEmpty = matcher.group(1);
+            if (matcher.matches()) {
+                String moduleOrEmpty = matcher.group(1);
 
-            if (moduleOrEmpty.isEmpty()) {
-                completionResultSet.addAllElements(LoveElements.getElementsFor(LoveTypes.CALLBACKS_KEY));
-                completionResultSet.addAllElements(LoveElements.getElementsFor(LoveTypes.MODULES_KEY));
-            } else {
-                if (lineText.endsWith(".")) {
-                    completionResultSet.addAllElements(LoveElements.getElementsFor(moduleOrEmpty));
+                if (moduleOrEmpty.isEmpty()) {
+                    completionResultSet.addAllElements(LoveElements.getElementsFor(LoveTypes.CALLBACKS_KEY));
+                    completionResultSet.addAllElements(LoveElements.getElementsFor(LoveTypes.MODULES_KEY));
+                } else {
+                    if (lineText.endsWith(".")) {
+                        completionResultSet.addAllElements(LoveElements.getElementsFor(moduleOrEmpty));
+                    }
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
