@@ -19,16 +19,23 @@ public class LoveCompletionProvider extends CompletionProvider<CompletionParamet
         CharSequence text = document.getCharsSequence();
 
         String trigger = "love.";
-
+        String audio_module = "audio.";
         // Ensure we don’t go out of bounds
         if (offset >= trigger.length()) {
             // Extract the substring of length 'trigger.length()' ending at offset
-            CharSequence recentText = text.subSequence(offset - trigger.length(), offset);
+            CharSequence recentText = text.subSequence(offset - trigger.length() - 1, offset).toString().trim();
 
             // Compare to our trigger
             if (trigger.contentEquals(recentText)) {
                 // If it matches, add your completions
-                completionResultSet.addAllElements(LoveElements.LOVE_CALLBACKS);
+                completionResultSet.addAllElements(LoveElements.getElementsFor(LoveTypes.CALLBACKS_KEY));
+                completionResultSet.addAllElements(LoveElements.getElementsFor(LoveTypes.MODULES_KEY
+                ));
+            }
+
+            if (audio_module.contentEquals(recentText)) {
+                completionResultSet.addAllElements(LoveElements.getElementsFor(LoveTypes.AUDIO_KEY));
+
             }
         }
 
