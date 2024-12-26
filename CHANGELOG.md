@@ -10,17 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 
-### Changed
+- Added completion suggestions for callbacks, modules, and functions
+- Initial scaffold created
+  from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
 
-### Fixed
-
-## [1.0.0] - 2024-12-26
-
-### Added
-
-- Initial Release
-
-### Changed
-
-### Fixed
 
