@@ -1,8 +1,8 @@
-# love-framework
+# Love Framework Support for IntelliJ IDEA
 
 ![Build](https://github.com/pedrollanca/intellij-love-framework/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/26200)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/26200)
+[![Version](https://img.shields.io/jetbrains/plugin/v/26200.svg)](https://plugins.jetbrains.com/plugin/26200)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/26200.svg)](https://plugins.jetbrains.com/plugin/26200)
 
 ## Overview
 
@@ -42,7 +42,7 @@ You can install **Love Framework Support** using one of the following methods:
 
 ### **2. Using JetBrains Marketplace:**
 
-1. Visit the [Love Framework Support Plugin Page](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID).
+1. Visit the [Love Framework Support Plugin Page](https://plugins.jetbrains.com/plugin/26200).
 2. Click the <kbd>Install to ...</kbd> button. If your IDE is running, the plugin will be installed automatically.
 3. Alternatively, download the [latest release](https://github.com/pedrollanca/intellij-love-framework/releases/latest)
    and install it manually:
