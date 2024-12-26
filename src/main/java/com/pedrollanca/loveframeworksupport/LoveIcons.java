@@ -19,8 +19,19 @@
  * SOFTWARE.
  */
 
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
-}
+package com.pedrollanca.loveframeworksupport;
 
-rootProject.name = "love-framework-support"
+import com.intellij.openapi.util.IconLoader;
+
+import javax.swing.*;
+
+/**
+ * Utility class for managing icons used in the IntelliJ Love Framework.
+ */
+public class LoveIcons {
+
+    /**
+     * Represents the main Love Framework icon.
+     */
+    public static final Icon LOVE_ICON = IconLoader.getIcon("/icons/loveicon.png", LoveIcons.class);
+}

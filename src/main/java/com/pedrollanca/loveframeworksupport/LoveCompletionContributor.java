@@ -19,8 +19,24 @@
  * SOFTWARE.
  */
 
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
-}
+package com.pedrollanca.loveframeworksupport;
 
-rootProject.name = "love-framework-support"
+import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.lang.Language;
+
+import static com.intellij.patterns.PlatformPatterns.psiElement;
+
+/**
+ * Provides custom code completion features for the IntelliJ Love Framework.
+ */
+final public class LoveCompletionContributor extends CompletionContributor {
+
+    /**
+     * Initializes the LoveCompletionContributor by extending the BASIC completion type
+     * with the LoveCompletionProvider for any language.
+     */
+    LoveCompletionContributor() {
+        extend(CompletionType.BASIC, psiElement().withLanguage(Language.ANY), new LoveCompletionProvider());
+    }
+}
