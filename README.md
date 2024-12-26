@@ -1,51 +1,160 @@
-# intellij-love-framework
+# love-framework
 
 ![Build](https://github.com/pedrollanca/intellij-love-framework/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 
-## Template ToDo list
-- [x] Create a new [IntelliJ Platform Plugin Template][template] project.
-- [ ] Get familiar with the [template documentation][template].
-- [ ] Adjust the [pluginGroup](./gradle.properties) and [pluginName](./gradle.properties), as well as the [id](./src/main/resources/META-INF/plugin.xml) and [sources package](./src/main/kotlin).
-- [ ] Adjust the plugin description in `README` (see [Tips][docs:plugin-description])
-- [ ] Review the [Legal Agreements](https://plugins.jetbrains.com/docs/marketplace/legal-agreements.html?from=IJPluginTemplate).
-- [ ] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate) for the first time.
-- [ ] Set the `MARKETPLACE_ID` in the above README badges. You can obtain it once the plugin is published to JetBrains Marketplace.
-- [ ] Set the [Plugin Signing](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html?from=IJPluginTemplate) related [secrets](https://github.com/JetBrains/intellij-platform-plugin-template#environment-variables).
-- [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html?from=IJPluginTemplate).
-- [ ] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
+## Overview
+
+**love-framework** is an IntelliJ IDEA plugin designed to enhance your development experience with
+the [LÖVE](https://love2d.org/) framework for Lua. By providing intelligent autocompletion for LÖVE's extensive API,
+this plugin streamlines your coding workflow, reduces errors, and boosts productivity.
 
 <!-- Plugin description -->
-This Fancy IntelliJ Platform Plugin is going to be your implementation of the brilliant ideas that you have.
-
-This specific section is a source for the [plugin.xml](/src/main/resources/META-INF/plugin.xml) file which will be extracted by the [Gradle](/build.gradle.kts) during the build process.
-
-To keep everything working, do not remove `<!-- ... -->` sections. 
+Love Framework is a simple plugin for IntelliJ IDEA that adds code completion for the LOVE 2D game engine. It offers
+suggestions for LOVE modules, functions, and callbacks, helping you write game code more easily. This plugin aims to
+make developing LOVE 2D projects smoother and more efficient within IntelliJ.
 <!-- Plugin description end -->
+
+### **Key Features:**
+
+- **Context-Aware Autocompletion:**
+  - **Callbacks & Modules:** When typing `love.`, the plugin suggests relevant callbacks (e.g., `load`, `update`,
+    `draw`) and modules (e.g., `audio`, `graphics`).
+  - **Module-Specific Functions:** After selecting a module (e.g., `audio`) and typing `.`, only functions related to
+    that module are suggested (e.g., `play`, `stop`).
+
+- **Seamless Integration:**
+  - **Supports Lua Files:** The plugin activates only within Lua files (`.lua`), ensuring that suggestions are relevant
+    and context-specific.
+
+- **Lightweight & Efficient:**
+  - Designed to have minimal impact on IDE performance while providing robust autocompletion features.
 
 ## Installation
 
-- Using the IDE built-in plugin system:
-  
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "intellij-love-framework"</kbd> >
-  <kbd>Install</kbd>
-  
-- Using JetBrains Marketplace:
+You can install **love-framework** using one of the following methods:
 
-  Go to [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID) and install it by clicking the <kbd>Install to ...</kbd> button in case your IDE is running.
+### **1. Using the IDE Built-in Plugin System:**
 
-  You can also download the [latest release](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID/versions) from JetBrains Marketplace and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
+1. Open IntelliJ IDEA.
+2. Navigate to <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd>.
+3. Search for "**love-framework**".
+4. Click <kbd>Install</kbd>.
+5. Restart the IDE if prompted.
 
-- Manually:
+### **2. Using JetBrains Marketplace:**
 
-  Download the [latest release](https://github.com/pedrollanca/intellij-love-framework/releases/latest) and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
+1. Visit the [love-framework Plugin Page](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID).
+2. Click the <kbd>Install to ...</kbd> button. If your IDE is running, the plugin will be installed automatically.
+3. Alternatively, download the [latest release](https://github.com/pedrollanca/intellij-love-framework/releases/latest)
+   and install it manually:
 
+- Open IntelliJ IDEA.
+- Go to <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>.
+- Select the downloaded plugin file and follow the prompts.
+
+### **3. Manually Installing from Disk:**
+
+1. Download the [latest release](https://github.com/pedrollanca/intellij-love-framework/releases/latest) of the plugin.
+2. Open IntelliJ IDEA.
+3. Navigate to <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from
+   disk...</kbd>.
+4. Select the downloaded `.zip` or `.jar` file.
+5. Click <kbd>OK</kbd> and restart the IDE if prompted.
+
+## Usage
+
+Once installed, **love-framework** enhances your Lua development within IntelliJ IDEA by providing intelligent
+autocompletion for the LÖVE framework.
+
+### **Getting Started:**
+
+1. **Open a Lua File:**
+
+- Create or open a `.lua` file in your project.
+
+2. **Trigger Autocompletion:**
+
+- Start typing `love.` at the beginning of a line.
+- **Suggestions:** Callbacks (`load`, `update`, `draw`) and modules (`audio`, `graphics`, etc.) will appear.
+
+3. **Module-Specific Functions:**
+
+- Select a module from the suggestions (e.g., `audio`) and type `.` again.
+- **Suggestions:** Only functions related to the selected module (e.g., `play`, `stop`) will appear.
+
+## Future Improvements
+
+The **love-framework** plugin is continuously evolving. Here are some planned enhancements:
+
+- **Expanded Module Support:**
+  - Incorporate autocompletion for all existing and future LÖVE modules.
+
+- **Documentation Integration:**
+  - Provide inline documentation popups for functions and modules to offer immediate context and usage examples.
+
+- **Snippet Support:**
+  - Introduce code snippets for common LÖVE patterns to accelerate development.
+
+- **Error Detection:**
+  - Implement real-time error highlighting for common mistakes when using the LÖVE API.
+
+- **Customization Options:**
+  - Allow users to customize autocompletion settings, such as prioritizing certain modules or callbacks.
+
+- **Performance Optimization:**
+  - Enhance the plugin's efficiency to ensure minimal impact on IDE performance, especially for large projects.
+
+- **Integration with EmmyLua:**
+  - Leverage EmmyLua's `LuaLanguage` class for enhanced language support and compatibility.
+
+## Development
+
+If you're interested in contributing to **love-framework**, follow these steps to set up the development environment:
+
+### **1. Open the Project in IntelliJ IDEA:**
+
+- Open IntelliJ IDEA.
+- Select <kbd>File</kbd> > <kbd>Open...</kbd> and navigate to the cloned repository's directory.
+- Click <kbd>OK</kbd> to open the project.
+
+### **2. Build the Project:**
+
+- Ensure you have the necessary dependencies configured in `build.gradle`.
+- Use the Gradle tool window to build the project:
+  - Locate the `build.gradle` file.
+  - Run the `build` task.
+
+### **3. Run the Plugin:**
+
+- Use the Gradle task to run the plugin in a sandboxed IntelliJ instance:
+  - Execute the `runIde` task.
+
+### **4. Contribute:**
+
+- Fork the repository and create a new branch for your feature or bug fix.
+- Submit a pull request with detailed descriptions of your changes.
+
+## Testing
+
+The plugin includes a suite of tests to ensure reliability and functionality.
+
+### **Running Tests:**
+
+1. Open the project in IntelliJ IDEA.
+2. Navigate to the `LoveElementsTest` class located in `src/test/java/com/pedrollanca/intellijloveframework/`.
+3. Right-click on the class and select <kbd>Run 'LoveElementsTest'</kbd>.
+
+## License
+
+[MIT](LICENSE)
+
+## Acknowledgements
+
+- [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template) – The foundation
+  for building this plugin.
+- [EmmyLua](https://plugins.jetbrains.com/plugin/10896-emmylua) – For providing comprehensive Lua support within
+  IntelliJ IDEA.
 
 ---
-Plugin based on the [IntelliJ Platform Plugin Template][template].
-
-[template]: https://github.com/JetBrains/intellij-platform-plugin-template
-[docs:plugin-description]: https://plugins.jetbrains.com/docs/intellij/plugin-user-experience.html#plugin-description-and-presentation

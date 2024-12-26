@@ -1,3 +1,24 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2024 - Pedro Chamorro Llanca
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package com.pedrollanca.intellijloveframework;
 
 import com.intellij.codeInsight.completion.PrioritizedLookupElement;
@@ -7,33 +28,28 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * A utility class that holds constants for type texts and map keys used in LookupElements.
+ */
 public class LoveElements {
 
-    // -------------------------------------------------------------------
-    // 1) Helper Method
-    // -------------------------------------------------------------------
     /**
-     * Helper to create a LookupElement with consistent style:
-     *  - Bold text
-     *  - Uses the LoveIcons.LOVE_ICON
-     *  - Sets the given type text (e.g., "Callback", "Module", "Function")
-     *
-     * @param name      The display text of the completion item.
-     * @param typeText  The type text (from LoveTypes) displayed alongside the item.
-     * @return A styled LookupElement.
+     * A Map that stores all LookupElement lists categorized by their keys.
+     * Keys include:
+     * - "callbacks" -> LOVE_CALLBACKS
+     * - "modules"   -> LOVE_MODULES
+     * - "audio"     -> LOVE_AUDIO_FUNCTIONS
+     * - "data"      -> LOVE_DATA_FUNCTIONS
+     * - "event"     -> LOVE_EVENT_FUNCTIONS
+     * - "filesystem"-> LOVE_FILESYSTEM_FUNCTIONS
+     * - "font"      -> LOVE_FONT_FUNCTIONS
+     * - "graphics"  -> LOVE_GRAPHICS_FUNCTIONS
+     * - "image"     -> LOVE_IMAGE_FUNCTIONS
+     * - ... (add more as needed)
      */
-    private static LookupElement createElement(String name, String typeText) {
-        LookupElement element = LookupElementBuilder.create(name)
-                .bold()
-                .withTypeText(typeText)
-                .withIcon(LoveIcons.LOVE_ICON);
+    public static final Map<String, List<LookupElement>> LOVE_LOOKUP_MAP;
 
-       return PrioritizedLookupElement.withPriority(element, 1000);
-    }
-
-    // -------------------------------------------------------------------
-    // 2) Callbacks (load, update, draw)
-    // -------------------------------------------------------------------
+    // Callbacks
     private static final LookupElement LOVE_LOAD_CALLBACK =
             createElement("load", LoveTypes.CALLBACK);
 
@@ -52,9 +68,7 @@ public class LoveElements {
             LOVE_DRAW_CALLBACK
     );
 
-    // -------------------------------------------------------------------
-    // 3) Modules (no "love." prefix, all marked as "Module")
-    // -------------------------------------------------------------------
+    // Modules
     private static final LookupElement LOVE_AUDIO_MODULE =
             createElement("audio", LoveTypes.MODULE);
 
@@ -137,11 +151,7 @@ public class LoveElements {
             LOVE_WINDOW_MODULE
     );
 
-    // -------------------------------------------------------------------
-    // 4) Functions for Each Module (Marked as "Function")
-    // -------------------------------------------------------------------
-
-    // -------------------------------------------------------------------
+    // Audio Functions
     private static final LookupElement AUDIO_GET_ACTIVE_EFFECTS =
             createElement("getActiveEffects", LoveTypes.FUNCTION);
 
@@ -268,44 +278,34 @@ public class LoveElements {
             AUDIO_STOP
     );
 
-
-    // love.data.compress
+    // Data Functions
     private static final LookupElement DATA_COMPRESS =
             createElement("compress", LoveTypes.FUNCTION);
 
-    // love.data.decode
     private static final LookupElement DATA_DECODE =
             createElement("decode", LoveTypes.FUNCTION);
 
-    // love.data.decompress
     private static final LookupElement DATA_DECOMPRESS =
             createElement("decompress", LoveTypes.FUNCTION);
 
-    // love.data.encode
     private static final LookupElement DATA_ENCODE =
             createElement("encode", LoveTypes.FUNCTION);
 
-    // love.data.getPackedSize
     private static final LookupElement DATA_GET_PACKED_SIZE =
             createElement("getPackedSize", LoveTypes.FUNCTION);
 
-    // love.data.hash
     private static final LookupElement DATA_HASH =
             createElement("hash", LoveTypes.FUNCTION);
 
-    // love.data.newByteData
     private static final LookupElement DATA_NEW_BYTE_DATA =
             createElement("newByteData", LoveTypes.FUNCTION);
 
-    // love.data.newDataView
     private static final LookupElement DATA_NEW_DATA_VIEW =
             createElement("newDataView", LoveTypes.FUNCTION);
 
-    // love.data.pack
     private static final LookupElement DATA_PACK =
             createElement("pack", LoveTypes.FUNCTION);
 
-    // love.data.unpack
     private static final LookupElement DATA_UNPACK =
             createElement("unpack", LoveTypes.FUNCTION);
 
@@ -325,30 +325,22 @@ public class LoveElements {
             DATA_UNPACK
     );
 
-    // -------------------------------------------------------------------
-    // love.event functions
-    // -------------------------------------------------------------------
-    // love.event.clear
+    // Event Functions
     private static final LookupElement EVENT_CLEAR =
             createElement("clear", LoveTypes.FUNCTION);
 
-    // love.event.poll
     private static final LookupElement EVENT_POLL =
             createElement("poll", LoveTypes.FUNCTION);
 
-    // love.event.pump
     private static final LookupElement EVENT_PUMP =
             createElement("pump", LoveTypes.FUNCTION);
 
-    // love.event.push
     private static final LookupElement EVENT_PUSH =
             createElement("push", LoveTypes.FUNCTION);
 
-    // love.event.quit
     private static final LookupElement EVENT_QUIT =
             createElement("quit", LoveTypes.FUNCTION);
 
-    // love.event.wait
     private static final LookupElement EVENT_WAIT =
             createElement("wait", LoveTypes.FUNCTION);
 
@@ -364,162 +356,121 @@ public class LoveElements {
             EVENT_WAIT
     );
 
-    // -------------------------------------------------------------------
-    // love.filesystem functions
-    // -------------------------------------------------------------------
-    // love.filesystem.append
+    // Filesystem Functions
     private static final LookupElement FILESYSTEM_APPEND =
             createElement("append", LoveTypes.FUNCTION);
 
-    // love.filesystem.areSymlinksEnabled
     private static final LookupElement FILESYSTEM_ARE_SYMLINKS_ENABLED =
             createElement("areSymlinksEnabled", LoveTypes.FUNCTION);
 
-    // love.filesystem.createDirectory
     private static final LookupElement FILESYSTEM_CREATE_DIRECTORY =
             createElement("createDirectory", LoveTypes.FUNCTION);
 
-    // love.filesystem.enumerate
     private static final LookupElement FILESYSTEM_ENUMERATE =
             createElement("enumerate", LoveTypes.FUNCTION);
 
-    // love.filesystem.exists
     private static final LookupElement FILESYSTEM_EXISTS =
             createElement("exists", LoveTypes.FUNCTION);
 
-    // love.filesystem.getAppdataDirectory
     private static final LookupElement FILESYSTEM_GET_APPDATA_DIRECTORY =
             createElement("getAppdataDirectory", LoveTypes.FUNCTION);
 
-    // love.filesystem.getCRequirePath
     private static final LookupElement FILESYSTEM_GET_C_REQUIRE_PATH =
             createElement("getCRequirePath", LoveTypes.FUNCTION);
 
-    // love.filesystem.getDirectoryItems
     private static final LookupElement FILESYSTEM_GET_DIRECTORY_ITEMS =
             createElement("getDirectoryItems", LoveTypes.FUNCTION);
 
-    // love.filesystem.getIdentity
     private static final LookupElement FILESYSTEM_GET_IDENTITY =
             createElement("getIdentity", LoveTypes.FUNCTION);
 
-    // love.filesystem.getInfo
     private static final LookupElement FILESYSTEM_GET_INFO =
             createElement("getInfo", LoveTypes.FUNCTION);
 
-    // love.filesystem.getLastModified
     private static final LookupElement FILESYSTEM_GET_LAST_MODIFIED =
             createElement("getLastModified", LoveTypes.FUNCTION);
 
-    // love.filesystem.getRealDirectory
     private static final LookupElement FILESYSTEM_GET_REAL_DIRECTORY =
             createElement("getRealDirectory", LoveTypes.FUNCTION);
 
-    // love.filesystem.getRequirePath
     private static final LookupElement FILESYSTEM_GET_REQUIRE_PATH =
             createElement("getRequirePath", LoveTypes.FUNCTION);
 
-    // love.filesystem.getSaveDirectory
     private static final LookupElement FILESYSTEM_GET_SAVE_DIRECTORY =
             createElement("getSaveDirectory", LoveTypes.FUNCTION);
 
-    // love.filesystem.getSize
     private static final LookupElement FILESYSTEM_GET_SIZE =
             createElement("getSize", LoveTypes.FUNCTION);
 
-    // love.filesystem.getSource
     private static final LookupElement FILESYSTEM_GET_SOURCE =
             createElement("getSource", LoveTypes.FUNCTION);
 
-    // love.filesystem.getSourceBaseDirectory
     private static final LookupElement FILESYSTEM_GET_SOURCE_BASE_DIRECTORY =
             createElement("getSourceBaseDirectory", LoveTypes.FUNCTION);
 
-    // love.filesystem.getUserDirectory
     private static final LookupElement FILESYSTEM_GET_USER_DIRECTORY =
             createElement("getUserDirectory", LoveTypes.FUNCTION);
 
-    // love.filesystem.getWorkingDirectory
     private static final LookupElement FILESYSTEM_GET_WORKING_DIRECTORY =
             createElement("getWorkingDirectory", LoveTypes.FUNCTION);
 
-    // love.filesystem.init
     private static final LookupElement FILESYSTEM_INIT =
             createElement("init", LoveTypes.FUNCTION);
 
-    // love.filesystem.isDirectory
     private static final LookupElement FILESYSTEM_IS_DIRECTORY =
             createElement("isDirectory", LoveTypes.FUNCTION);
 
-    // love.filesystem.isFile
     private static final LookupElement FILESYSTEM_IS_FILE =
             createElement("isFile", LoveTypes.FUNCTION);
 
-    // love.filesystem.isFused
     private static final LookupElement FILESYSTEM_IS_FUSED =
             createElement("isFused", LoveTypes.FUNCTION);
 
-    // love.filesystem.isSymlink
     private static final LookupElement FILESYSTEM_IS_SYMLINK =
             createElement("isSymlink", LoveTypes.FUNCTION);
 
-    // love.filesystem.lines
     private static final LookupElement FILESYSTEM_LINES =
             createElement("lines", LoveTypes.FUNCTION);
 
-    // love.filesystem.load
     private static final LookupElement FILESYSTEM_LOAD =
             createElement("load", LoveTypes.FUNCTION);
 
-    // love.filesystem.mkdir
     private static final LookupElement FILESYSTEM_MKDIR =
             createElement("mkdir", LoveTypes.FUNCTION);
 
-    // love.filesystem.mount
     private static final LookupElement FILESYSTEM_MOUNT =
             createElement("mount", LoveTypes.FUNCTION);
 
-    // love.filesystem.newFile
     private static final LookupElement FILESYSTEM_NEW_FILE =
             createElement("newFile", LoveTypes.FUNCTION);
 
-    // love.filesystem.newFileData
     private static final LookupElement FILESYSTEM_NEW_FILE_DATA =
             createElement("newFileData", LoveTypes.FUNCTION);
 
-    // love.filesystem.read
     private static final LookupElement FILESYSTEM_READ =
             createElement("read", LoveTypes.FUNCTION);
 
-    // love.filesystem.remove
     private static final LookupElement FILESYSTEM_REMOVE =
             createElement("remove", LoveTypes.FUNCTION);
 
-    // love.filesystem.setCRequirePath
     private static final LookupElement FILESYSTEM_SET_C_REQUIRE_PATH =
             createElement("setCRequirePath", LoveTypes.FUNCTION);
 
-    // love.filesystem.setIdentity
     private static final LookupElement FILESYSTEM_SET_IDENTITY =
             createElement("setIdentity", LoveTypes.FUNCTION);
 
-    // love.filesystem.setRequirePath
     private static final LookupElement FILESYSTEM_SET_REQUIRE_PATH =
             createElement("setRequirePath", LoveTypes.FUNCTION);
 
-    // love.filesystem.setSource
     private static final LookupElement FILESYSTEM_SET_SOURCE =
             createElement("setSource", LoveTypes.FUNCTION);
 
-    // love.filesystem.setSymlinksEnabled
     private static final LookupElement FILESYSTEM_SET_SYMLINKS_ENABLED =
             createElement("setSymlinksEnabled", LoveTypes.FUNCTION);
 
-    // love.filesystem.unmount
     private static final LookupElement FILESYSTEM_UNMOUNT =
             createElement("unmount", LoveTypes.FUNCTION);
 
-    // love.filesystem.write
     private static final LookupElement FILESYSTEM_WRITE =
             createElement("write", LoveTypes.FUNCTION);
 
@@ -568,30 +519,22 @@ public class LoveElements {
             FILESYSTEM_WRITE
     );
 
-    // -------------------------------------------------------------------
-    // love.font functions
-    // -------------------------------------------------------------------
-    // love.font.newBMFontRasterizer
+    // Font Functions
     private static final LookupElement FONT_NEW_BM_FONT_RASTERIZER =
             createElement("newBMFontRasterizer", LoveTypes.FUNCTION);
 
-    // love.font.newFontData
     private static final LookupElement FONT_NEW_FONT_DATA =
             createElement("newFontData", LoveTypes.FUNCTION);
 
-    // love.font.newGlyphData
     private static final LookupElement FONT_NEW_GLYPH_DATA =
             createElement("newGlyphData", LoveTypes.FUNCTION);
 
-    // love.font.newImageRasterizer
     private static final LookupElement FONT_NEW_IMAGE_RASTERIZER =
             createElement("newImageRasterizer", LoveTypes.FUNCTION);
 
-    // love.font.newRasterizer
     private static final LookupElement FONT_NEW_RASTERIZER =
             createElement("newRasterizer", LoveTypes.FUNCTION);
 
-    // love.font.newTrueTypeRasterizer
     private static final LookupElement FONT_NEW_TRUE_TYPE_RASTERIZER =
             createElement("newTrueTypeRasterizer", LoveTypes.FUNCTION);
 
@@ -607,88 +550,243 @@ public class LoveElements {
             FONT_NEW_TRUE_TYPE_RASTERIZER
     );
 
-    // -------------------------------------------------------------------
-    // love.graphics functions
-    // -------------------------------------------------------------------
-    // Due to the extensive list of love.graphics functions, we'll categorize them.
-    // For brevity, only a subset is shown here. You should follow the same pattern
-    // to include all functions.
-
-    // love.graphics.arc
-    private static final LookupElement GRAPHICS_ARC =
-            createElement("arc", LoveTypes.FUNCTION);
-
-    // love.graphics.circle
-    private static final LookupElement GRAPHICS_CIRCLE =
-            createElement("circle", LoveTypes.FUNCTION);
-
-    // love.graphics.clear
-    private static final LookupElement GRAPHICS_CLEAR =
-            createElement("clear", LoveTypes.FUNCTION);
-
-    // love.graphics.discard
-    private static final LookupElement GRAPHICS_DISCARD =
-            createElement("discard", LoveTypes.FUNCTION);
-
-    // love.graphics.draw
-    private static final LookupElement GRAPHICS_DRAW =
-            createElement("draw", LoveTypes.FUNCTION);
-
-    // ... Continue defining all other love.graphics functions ...
-
-    // For demonstration, let's include a few more:
-    // love.graphics.line
-    private static final LookupElement GRAPHICS_LINE =
-            createElement("line", LoveTypes.FUNCTION);
-
-    // love.graphics.point
-    private static final LookupElement GRAPHICS_POINT =
-            createElement("point", LoveTypes.FUNCTION);
-
-    // love.graphics.print
-    private static final LookupElement GRAPHICS_PRINT =
-            createElement("print", LoveTypes.FUNCTION);
-
-    // love.graphics.setColor
+    // Graphics Functions
     private static final LookupElement GRAPHICS_SET_COLOR =
             createElement("setColor", LoveTypes.FUNCTION);
 
-    // ... Define all remaining love.graphics functions similarly ...
+    private static final LookupElement GRAPHICS_SET_BACKGROUND_COLOR =
+            createElement("setBackgroundColor", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_NEW_IMAGE =
+            createElement("newImage", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_DRAW =
+            createElement("draw", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_RECTANGLE =
+            createElement("rectangle", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_CIRCLE =
+            createElement("circle", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_PRINT =
+            createElement("print", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SET_FONT =
+            createElement("setFont", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_NEW_FONT =
+            createElement("newFont", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SET_LINE_WIDTH =
+            createElement("setLineWidth", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SET_LINE_STYLE =
+            createElement("setLineStyle", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SET_BLEND_MODE =
+            createElement("setBlendMode", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_NEW_CANVAS =
+            createElement("newCanvas", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SET_CANVAS =
+            createElement("setCanvas", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_GET_CANVAS =
+            createElement("getCanvas", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SET_SCISSOR =
+            createElement("setScissor", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_GET_SCISSOR =
+            createElement("getScissor", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_CLEAR =
+            createElement("clear", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_PRESENT =
+            createElement("present", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_PUSH =
+            createElement("push", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_POP =
+            createElement("pop", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_ORIGIN =
+            createElement("origin", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SCALE =
+            createElement("scale", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_ROTATE =
+            createElement("rotate", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SHEAR =
+            createElement("shear", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_TRANSLATE =
+            createElement("translate", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SET_SCISSOR_BOX =
+            createElement("setScissor", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_RESET_SCISSOR =
+            createElement("resetScissor", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_NEW_QUAD =
+            createElement("newQuad", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_NEW_MESH =
+            createElement("newMesh", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SET_MESH_DRAW_MODE =
+            createElement("setMeshDrawMode", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_GET_COLOR =
+            createElement("getColor", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_GET_BACKGROUND_COLOR =
+            createElement("getBackgroundColor", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_GET_FONT =
+            createElement("getFont", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_NEW_IMAGE_DATA =
+            createElement("newImageData", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_NEW_SHADER =
+            createElement("newShader", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SET_SHADER =
+            createElement("setShader", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_GET_SHADER =
+            createElement("getShader", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_GET_BLEND_MODE =
+            createElement("getBlendMode", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_GET_LINE_WIDTH =
+            createElement("getLineWidth", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_GET_LINE_STYLE =
+            createElement("getLineStyle", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SET_POINT_SIZE =
+            createElement("setPointSize", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_GET_POINT_SIZE =
+            createElement("getPointSize", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SET_POINT_STYLE =
+            createElement("setPointStyle", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_GET_POINT_STYLE =
+            createElement("getPointStyle", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SET_LINE_JOIN =
+            createElement("setLineJoin", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_GET_LINE_JOIN =
+            createElement("getLineJoin", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_SET_LINE_CAP =
+            createElement("setLineCap", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_GET_LINE_CAP =
+            createElement("getLineCap", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_POLYGON =
+            createElement("polygon", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_ARC =
+            createElement("arc", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_LINE =
+            createElement("line", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_POINTS =
+            createElement("points", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_TRIANGLE =
+            createElement("triangle", LoveTypes.FUNCTION);
+
+    private static final LookupElement GRAPHICS_NEW_SPRITE_BATCH =
+            createElement("newSpriteBatch", LoveTypes.FUNCTION);
 
     /**
      * A List containing all graphics module functions.
-     * (Add all defined graphics functions to this list.)
      */
     private static final List<LookupElement> LOVE_GRAPHICS_FUNCTIONS = Arrays.asList(
-            GRAPHICS_ARC,
-            GRAPHICS_CIRCLE,
-            GRAPHICS_CLEAR,
-            GRAPHICS_DISCARD,
+            GRAPHICS_SET_COLOR,
+            GRAPHICS_SET_BACKGROUND_COLOR,
+            GRAPHICS_NEW_IMAGE,
             GRAPHICS_DRAW,
-            GRAPHICS_LINE,
-            GRAPHICS_POINT,
+            GRAPHICS_RECTANGLE,
+            GRAPHICS_CIRCLE,
             GRAPHICS_PRINT,
-            GRAPHICS_SET_COLOR
-            // ... Add all other love.graphics functions here ...
+            GRAPHICS_SET_FONT,
+            GRAPHICS_NEW_FONT,
+            GRAPHICS_SET_LINE_WIDTH,
+            GRAPHICS_SET_LINE_STYLE,
+            GRAPHICS_SET_BLEND_MODE,
+            GRAPHICS_NEW_CANVAS,
+            GRAPHICS_SET_CANVAS,
+            GRAPHICS_GET_CANVAS,
+            GRAPHICS_SET_SCISSOR,
+            GRAPHICS_GET_SCISSOR,
+            GRAPHICS_CLEAR,
+            GRAPHICS_PRESENT,
+            GRAPHICS_PUSH,
+            GRAPHICS_POP,
+            GRAPHICS_ORIGIN,
+            GRAPHICS_SCALE,
+            GRAPHICS_ROTATE,
+            GRAPHICS_SHEAR,
+            GRAPHICS_TRANSLATE,
+            GRAPHICS_SET_SCISSOR_BOX,
+            GRAPHICS_RESET_SCISSOR,
+            GRAPHICS_NEW_QUAD,
+            GRAPHICS_NEW_MESH,
+            GRAPHICS_SET_MESH_DRAW_MODE,
+            GRAPHICS_GET_COLOR,
+            GRAPHICS_GET_BACKGROUND_COLOR,
+            GRAPHICS_GET_FONT,
+            GRAPHICS_NEW_IMAGE_DATA,
+            GRAPHICS_NEW_SHADER,
+            GRAPHICS_SET_SHADER,
+            GRAPHICS_GET_SHADER,
+            GRAPHICS_GET_BLEND_MODE,
+            GRAPHICS_GET_LINE_WIDTH,
+            GRAPHICS_GET_LINE_STYLE,
+            GRAPHICS_SET_POINT_SIZE,
+            GRAPHICS_GET_POINT_SIZE,
+            GRAPHICS_SET_POINT_STYLE,
+            GRAPHICS_GET_POINT_STYLE,
+            GRAPHICS_SET_LINE_JOIN,
+            GRAPHICS_GET_LINE_JOIN,
+            GRAPHICS_SET_LINE_CAP,
+            GRAPHICS_GET_LINE_CAP,
+            GRAPHICS_POLYGON,
+            GRAPHICS_ARC,
+            GRAPHICS_LINE,
+            GRAPHICS_POINTS,
+            GRAPHICS_TRIANGLE,
+            GRAPHICS_NEW_SPRITE_BATCH
     );
 
-    // -------------------------------------------------------------------
-// love.image functions
-// -------------------------------------------------------------------
-
-    // love.image.isCompressed
+    // Image Functions
     private static final LookupElement IMAGE_IS_COMPRESSED =
             createElement("isCompressed", LoveTypes.FUNCTION);
 
-    // love.image.newCompressedData
     private static final LookupElement IMAGE_NEW_COMPRESSED_DATA =
             createElement("newCompressedData", LoveTypes.FUNCTION);
 
-    // love.image.newEncodedImageData
     private static final LookupElement IMAGE_NEW_ENCODED_IMAGE_DATA =
             createElement("newEncodedImageData", LoveTypes.FUNCTION);
 
-    // love.image.newImageData
     private static final LookupElement IMAGE_NEW_IMAGE_DATA =
             createElement("newImageData", LoveTypes.FUNCTION);
 
@@ -702,88 +800,64 @@ public class LoveElements {
             IMAGE_NEW_IMAGE_DATA
     );
 
-
-
-    // -------------------------------------------------------------------
-    // love.joystick functions
-    // -------------------------------------------------------------------
-    // love.joystick.close
+    // Joystick Functions
     private static final LookupElement JOYSTICK_CLOSE =
             createElement("close", LoveTypes.FUNCTION);
 
-    // love.joystick.getAxes
     private static final LookupElement JOYSTICK_GET_AXES =
             createElement("getAxes", LoveTypes.FUNCTION);
 
-    // love.joystick.getAxis
     private static final LookupElement JOYSTICK_GET_AXIS =
             createElement("getAxis", LoveTypes.FUNCTION);
 
-    // love.joystick.getBall
     private static final LookupElement JOYSTICK_GET_BALL =
             createElement("getBall", LoveTypes.FUNCTION);
 
-    // love.joystick.getGamepadMappingString
     private static final LookupElement JOYSTICK_GET_GAMEPAD_MAPPING_STRING =
             createElement("getGamepadMappingString", LoveTypes.FUNCTION);
 
-    // love.joystick.getHat
     private static final LookupElement JOYSTICK_GET_HAT =
             createElement("getHat", LoveTypes.FUNCTION);
 
-    // love.joystick.getJoystickCount
     private static final LookupElement JOYSTICK_GET_JOYSTICK_COUNT =
             createElement("getJoystickCount", LoveTypes.FUNCTION);
 
-    // love.joystick.getJoysticks
     private static final LookupElement JOYSTICK_GET_JOYSTICKS =
             createElement("getJoysticks", LoveTypes.FUNCTION);
 
-    // love.joystick.getName
     private static final LookupElement JOYSTICK_GET_NAME =
             createElement("getName", LoveTypes.FUNCTION);
 
-    // love.joystick.getNumAxes
     private static final LookupElement JOYSTICK_GET_NUM_AXES =
             createElement("getNumAxes", LoveTypes.FUNCTION);
 
-    // love.joystick.getNumBalls
     private static final LookupElement JOYSTICK_GET_NUM_BALLS =
             createElement("getNumBalls", LoveTypes.FUNCTION);
 
-    // love.joystick.getNumButtons
     private static final LookupElement JOYSTICK_GET_NUM_BUTTONS =
             createElement("getNumButtons", LoveTypes.FUNCTION);
 
-    // love.joystick.getNumHats
     private static final LookupElement JOYSTICK_GET_NUM_HATS =
             createElement("getNumHats", LoveTypes.FUNCTION);
 
-    // love.joystick.getNumJoysticks
     private static final LookupElement JOYSTICK_GET_NUM_JOYSTICKS =
             createElement("getNumJoysticks", LoveTypes.FUNCTION);
 
-    // love.joystick.isDown
     private static final LookupElement JOYSTICK_IS_DOWN =
             createElement("isDown", LoveTypes.FUNCTION);
 
-    // love.joystick.isOpen
     private static final LookupElement JOYSTICK_IS_OPEN =
             createElement("isOpen", LoveTypes.FUNCTION);
 
-    // love.joystick.loadGamepadMappings
     private static final LookupElement JOYSTICK_LOAD_GAMEPAD_MAPPINGS =
             createElement("loadGamepadMappings", LoveTypes.FUNCTION);
 
-    // love.joystick.open
     private static final LookupElement JOYSTICK_OPEN =
             createElement("open", LoveTypes.FUNCTION);
 
-    // love.joystick.saveGamepadMappings
     private static final LookupElement JOYSTICK_SAVE_GAMEPAD_MAPPINGS =
             createElement("saveGamepadMappings", LoveTypes.FUNCTION);
 
-    // love.joystick.setGamepadMapping
     private static final LookupElement JOYSTICK_SET_GAMEPAD_MAPPING =
             createElement("setGamepadMapping", LoveTypes.FUNCTION);
 
@@ -813,46 +887,34 @@ public class LoveElements {
             JOYSTICK_SET_GAMEPAD_MAPPING
     );
 
-    // -------------------------------------------------------------------
-    // love.keyboard functions
-    // -------------------------------------------------------------------
-    // love.keyboard.getKeyFromScancode
+    // Keyboard Functions
     private static final LookupElement KEYBOARD_GET_KEY_FROM_SCANCODE =
             createElement("getKeyFromScancode", LoveTypes.FUNCTION);
 
-    // love.keyboard.getKeyRepeat
     private static final LookupElement KEYBOARD_GET_KEY_REPEAT =
             createElement("getKeyRepeat", LoveTypes.FUNCTION);
 
-    // love.keyboard.getScancodeFromKey
     private static final LookupElement KEYBOARD_GET_SCANCODE_FROM_KEY =
             createElement("getScancodeFromKey", LoveTypes.FUNCTION);
 
-    // love.keyboard.hasKeyRepeat
     private static final LookupElement KEYBOARD_HAS_KEY_REPEAT =
             createElement("hasKeyRepeat", LoveTypes.FUNCTION);
 
-    // love.keyboard.hasScreenKeyboard
     private static final LookupElement KEYBOARD_HAS_SCREEN_KEYBOARD =
             createElement("hasScreenKeyboard", LoveTypes.FUNCTION);
 
-    // love.keyboard.hasTextInput
     private static final LookupElement KEYBOARD_HAS_TEXT_INPUT =
             createElement("hasTextInput", LoveTypes.FUNCTION);
 
-    // love.keyboard.isDown
     private static final LookupElement KEYBOARD_IS_DOWN =
             createElement("isDown", LoveTypes.FUNCTION);
 
-    // love.keyboard.isScancodeDown
     private static final LookupElement KEYBOARD_IS_SCANCODE_DOWN =
             createElement("isScancodeDown", LoveTypes.FUNCTION);
 
-    // love.keyboard.setKeyRepeat
     private static final LookupElement KEYBOARD_SET_KEY_REPEAT =
             createElement("setKeyRepeat", LoveTypes.FUNCTION);
 
-    // love.keyboard.setTextInput
     private static final LookupElement KEYBOARD_SET_TEXT_INPUT =
             createElement("setTextInput", LoveTypes.FUNCTION);
 
@@ -872,78 +934,58 @@ public class LoveElements {
             KEYBOARD_SET_TEXT_INPUT
     );
 
-    // -------------------------------------------------------------------
-    // love.math functions
-    // -------------------------------------------------------------------
-    // love.math.colorFromBytes
+    // Math Functions
     private static final LookupElement MATH_COLOR_FROM_BYTES =
             createElement("colorFromBytes", LoveTypes.FUNCTION);
 
-    // love.math.colorToBytes
     private static final LookupElement MATH_COLOR_TO_BYTES =
             createElement("colorToBytes", LoveTypes.FUNCTION);
 
-    // love.math.compress
     private static final LookupElement MATH_COMPRESS =
             createElement("compress", LoveTypes.FUNCTION);
 
-    // love.math.decompress
     private static final LookupElement MATH_DECOMPRESS =
             createElement("decompress", LoveTypes.FUNCTION);
 
-    // love.math.gammaToLinear
     private static final LookupElement MATH_GAMMA_TO_LINEAR =
             createElement("gammaToLinear", LoveTypes.FUNCTION);
 
-    // love.math.getRandomSeed
     private static final LookupElement MATH_GET_RANDOM_SEED =
             createElement("getRandomSeed", LoveTypes.FUNCTION);
 
-    // love.math.getRandomState
     private static final LookupElement MATH_GET_RANDOM_STATE =
             createElement("getRandomState", LoveTypes.FUNCTION);
 
-    // love.math.isConvex
     private static final LookupElement MATH_IS_CONVEX =
             createElement("isConvex", LoveTypes.FUNCTION);
 
-    // love.math.linearToGamma
     private static final LookupElement MATH_LINEAR_TO_GAMMA =
             createElement("linearToGamma", LoveTypes.FUNCTION);
 
-    // love.math.newBezierCurve
     private static final LookupElement MATH_NEW_BEZIER_CURVE =
             createElement("newBezierCurve", LoveTypes.FUNCTION);
 
-    // love.math.newRandomGenerator
     private static final LookupElement MATH_NEW_RANDOM_GENERATOR =
             createElement("newRandomGenerator", LoveTypes.FUNCTION);
 
-    // love.math.newTransform
     private static final LookupElement MATH_NEW_TRANSFORM =
             createElement("newTransform", LoveTypes.FUNCTION);
 
-    // love.math.noise
     private static final LookupElement MATH_NOISE =
             createElement("noise", LoveTypes.FUNCTION);
 
-    // love.math.random
     private static final LookupElement MATH_RANDOM =
             createElement("random", LoveTypes.FUNCTION);
 
-    // love.math.randomNormal
     private static final LookupElement MATH_RANDOM_NORMAL =
             createElement("randomNormal", LoveTypes.FUNCTION);
 
-    // love.math.setRandomSeed
     private static final LookupElement MATH_SET_RANDOM_SEED =
             createElement("setRandomSeed", LoveTypes.FUNCTION);
 
-    // love.math.setRandomState
     private static final LookupElement MATH_SET_RANDOM_STATE =
             createElement("setRandomState", LoveTypes.FUNCTION);
 
-    // love.math.triangulate
     private static final LookupElement MATH_TRIANGULATE =
             createElement("triangulate", LoveTypes.FUNCTION);
 
@@ -971,86 +1013,64 @@ public class LoveElements {
             MATH_TRIANGULATE
     );
 
-    // -------------------------------------------------------------------
-    // love.mouse functions
-    // -------------------------------------------------------------------
-    // love.mouse.getCursor
+    // Mouse Functions
     private static final LookupElement MOUSE_GET_CURSOR =
             createElement("getCursor", LoveTypes.FUNCTION);
 
-    // love.mouse.getPosition
     private static final LookupElement MOUSE_GET_POSITION =
             createElement("getPosition", LoveTypes.FUNCTION);
 
-    // love.mouse.getRelativeMode
     private static final LookupElement MOUSE_GET_RELATIVE_MODE =
             createElement("getRelativeMode", LoveTypes.FUNCTION);
 
-    // love.mouse.getSystemCursor
     private static final LookupElement MOUSE_GET_SYSTEM_CURSOR =
             createElement("getSystemCursor", LoveTypes.FUNCTION);
 
-    // love.mouse.getX
     private static final LookupElement MOUSE_GET_X =
             createElement("getX", LoveTypes.FUNCTION);
 
-    // love.mouse.getY
     private static final LookupElement MOUSE_GET_Y =
             createElement("getY", LoveTypes.FUNCTION);
 
-    // love.mouse.hasCursor
     private static final LookupElement MOUSE_HAS_CURSOR =
             createElement("hasCursor", LoveTypes.FUNCTION);
 
-    // love.mouse.isCursorSupported
     private static final LookupElement MOUSE_IS_CURSOR_SUPPORTED =
             createElement("isCursorSupported", LoveTypes.FUNCTION);
 
-    // love.mouse.isDown
     private static final LookupElement MOUSE_IS_DOWN =
             createElement("isDown", LoveTypes.FUNCTION);
 
-    // love.mouse.isGrabbed
     private static final LookupElement MOUSE_IS_GRABBED =
             createElement("isGrabbed", LoveTypes.FUNCTION);
 
-    // love.mouse.isVisible
     private static final LookupElement MOUSE_IS_VISIBLE =
             createElement("isVisible", LoveTypes.FUNCTION);
 
-    // love.mouse.newCursor
     private static final LookupElement MOUSE_NEW_CURSOR =
             createElement("newCursor", LoveTypes.FUNCTION);
 
-    // love.mouse.setCursor
     private static final LookupElement MOUSE_SET_CURSOR =
             createElement("setCursor", LoveTypes.FUNCTION);
 
-    // love.mouse.setGrab
     private static final LookupElement MOUSE_SET_GRAB =
             createElement("setGrab", LoveTypes.FUNCTION);
 
-    // love.mouse.setGrabbed
     private static final LookupElement MOUSE_SET_GRABBED =
             createElement("setGrabbed", LoveTypes.FUNCTION);
 
-    // love.mouse.setPosition
     private static final LookupElement MOUSE_SET_POSITION =
             createElement("setPosition", LoveTypes.FUNCTION);
 
-    // love.mouse.setRelativeMode
     private static final LookupElement MOUSE_SET_RELATIVE_MODE =
             createElement("setRelativeMode", LoveTypes.FUNCTION);
 
-    // love.mouse.setVisible
     private static final LookupElement MOUSE_SET_VISIBLE =
             createElement("setVisible", LoveTypes.FUNCTION);
 
-    // love.mouse.setX
     private static final LookupElement MOUSE_SET_X =
             createElement("setX", LoveTypes.FUNCTION);
 
-    // love.mouse.setY
     private static final LookupElement MOUSE_SET_Y =
             createElement("setY", LoveTypes.FUNCTION);
 
@@ -1080,94 +1100,70 @@ public class LoveElements {
             MOUSE_SET_Y
     );
 
-    // -------------------------------------------------------------------
-    // love.physics functions
-    // -------------------------------------------------------------------
-    // love.physics.getDistance
+    // Physics Functions
     private static final LookupElement PHYSICS_GET_DISTANCE =
             createElement("getDistance", LoveTypes.FUNCTION);
 
-    // love.physics.getMeter
     private static final LookupElement PHYSICS_GET_METER =
             createElement("getMeter", LoveTypes.FUNCTION);
 
-    // love.physics.newBody
     private static final LookupElement PHYSICS_NEW_BODY =
             createElement("newBody", LoveTypes.FUNCTION);
 
-    // love.physics.newChainShape
     private static final LookupElement PHYSICS_NEW_CHAIN_SHAPE =
             createElement("newChainShape", LoveTypes.FUNCTION);
 
-    // love.physics.newCircleShape
     private static final LookupElement PHYSICS_NEW_CIRCLE_SHAPE =
             createElement("newCircleShape", LoveTypes.FUNCTION);
 
-    // love.physics.newDistanceJoint
     private static final LookupElement PHYSICS_NEW_DISTANCE_JOINT =
             createElement("newDistanceJoint", LoveTypes.FUNCTION);
 
-    // love.physics.newEdgeShape
     private static final LookupElement PHYSICS_NEW_EDGE_SHAPE =
             createElement("newEdgeShape", LoveTypes.FUNCTION);
 
-    // love.physics.newFixture
     private static final LookupElement PHYSICS_NEW_FIXTURE =
             createElement("newFixture", LoveTypes.FUNCTION);
 
-    // love.physics.newFrictionJoint
     private static final LookupElement PHYSICS_NEW_FRICTION_JOINT =
             createElement("newFrictionJoint", LoveTypes.FUNCTION);
 
-    // love.physics.newGearJoint
     private static final LookupElement PHYSICS_NEW_GEAR_JOINT =
             createElement("newGearJoint", LoveTypes.FUNCTION);
 
-    // love.physics.newMotorJoint
     private static final LookupElement PHYSICS_NEW_MOTOR_JOINT =
             createElement("newMotorJoint", LoveTypes.FUNCTION);
 
-    // love.physics.newMouseJoint
     private static final LookupElement PHYSICS_NEW_MOUSE_JOINT =
             createElement("newMouseJoint", LoveTypes.FUNCTION);
 
-    // love.physics.newPolygonShape
     private static final LookupElement PHYSICS_NEW_POLYGON_SHAPE =
             createElement("newPolygonShape", LoveTypes.FUNCTION);
 
-    // love.physics.newPrismaticJoint
     private static final LookupElement PHYSICS_NEW_PRISMATIC_JOINT =
             createElement("newPrismaticJoint", LoveTypes.FUNCTION);
 
-    // love.physics.newPulleyJoint
     private static final LookupElement PHYSICS_NEW_PULLEY_JOINT =
             createElement("newPulleyJoint", LoveTypes.FUNCTION);
 
-    // love.physics.newRectangleShape
     private static final LookupElement PHYSICS_NEW_RECTANGLE_SHAPE =
             createElement("newRectangleShape", LoveTypes.FUNCTION);
 
-    // love.physics.newRevoluteJoint
     private static final LookupElement PHYSICS_NEW_REVOLUTE_JOINT =
             createElement("newRevoluteJoint", LoveTypes.FUNCTION);
 
-    // love.physics.newRopeJoint
     private static final LookupElement PHYSICS_NEW_ROPE_JOINT =
             createElement("newRopeJoint", LoveTypes.FUNCTION);
 
-    // love.physics.newWeldJoint
     private static final LookupElement PHYSICS_NEW_WELD_JOINT =
             createElement("newWeldJoint", LoveTypes.FUNCTION);
 
-    // love.physics.newWheelJoint
     private static final LookupElement PHYSICS_NEW_WHEEL_JOINT =
             createElement("newWheelJoint", LoveTypes.FUNCTION);
 
-    // love.physics.newWorld
     private static final LookupElement PHYSICS_NEW_WORLD =
             createElement("newWorld", LoveTypes.FUNCTION);
 
-    // love.physics.setMeter
     private static final LookupElement PHYSICS_SET_METER =
             createElement("setMeter", LoveTypes.FUNCTION);
 
@@ -1199,14 +1195,10 @@ public class LoveElements {
             PHYSICS_SET_METER
     );
 
-    // -------------------------------------------------------------------
-    // love.sound functions
-    // -------------------------------------------------------------------
-    // love.sound.newDecoder
+    // Sound Functions
     private static final LookupElement SOUND_NEW_DECODER =
             createElement("newDecoder", LoveTypes.FUNCTION);
 
-    // love.sound.newSoundData
     private static final LookupElement SOUND_NEW_SOUND_DATA =
             createElement("newSoundData", LoveTypes.FUNCTION);
 
@@ -1218,38 +1210,28 @@ public class LoveElements {
             SOUND_NEW_SOUND_DATA
     );
 
-    // -------------------------------------------------------------------
-    // love.system functions
-    // -------------------------------------------------------------------
-    // love.system.getClipboardText
+    // System Functions
     private static final LookupElement SYSTEM_GET_CLIPBOARD_TEXT =
             createElement("getClipboardText", LoveTypes.FUNCTION);
 
-    // love.system.getOS
     private static final LookupElement SYSTEM_GET_OS =
             createElement("getOS", LoveTypes.FUNCTION);
 
-    // love.system.getPowerInfo
     private static final LookupElement SYSTEM_GET_POWER_INFO =
             createElement("getPowerInfo", LoveTypes.FUNCTION);
 
-    // love.system.getProcessorCount
     private static final LookupElement SYSTEM_GET_PROCESSOR_COUNT =
             createElement("getProcessorCount", LoveTypes.FUNCTION);
 
-    // love.system.hasBackgroundMusic
     private static final LookupElement SYSTEM_HAS_BACKGROUND_MUSIC =
             createElement("hasBackgroundMusic", LoveTypes.FUNCTION);
 
-    // love.system.openURL
     private static final LookupElement SYSTEM_OPEN_URL =
             createElement("openURL", LoveTypes.FUNCTION);
 
-    // love.system.setClipboardText
     private static final LookupElement SYSTEM_SET_CLIPBOARD_TEXT =
             createElement("setClipboardText", LoveTypes.FUNCTION);
 
-    // love.system.vibrate
     private static final LookupElement SYSTEM_VIBRATE =
             createElement("vibrate", LoveTypes.FUNCTION);
 
@@ -1267,26 +1249,19 @@ public class LoveElements {
             SYSTEM_VIBRATE
     );
 
-    // -------------------------------------------------------------------
-    // love.thread functions
-    // -------------------------------------------------------------------
-    // love.thread.getChannel
+    // Thread Functions
     private static final LookupElement THREAD_GET_CHANNEL =
             createElement("getChannel", LoveTypes.FUNCTION);
 
-    // love.thread.getThread
     private static final LookupElement THREAD_GET_THREAD =
             createElement("getThread", LoveTypes.FUNCTION);
 
-    // love.thread.getThreads
     private static final LookupElement THREAD_GET_THREADS =
             createElement("getThreads", LoveTypes.FUNCTION);
 
-    // love.thread.newChannel
     private static final LookupElement THREAD_NEW_CHANNEL =
             createElement("newChannel", LoveTypes.FUNCTION);
 
-    // love.thread.newThread
     private static final LookupElement THREAD_NEW_THREAD =
             createElement("newThread", LoveTypes.FUNCTION);
 
@@ -1301,34 +1276,25 @@ public class LoveElements {
             THREAD_NEW_THREAD
     );
 
-    // -------------------------------------------------------------------
-    // love.timer functions
-    // -------------------------------------------------------------------
-    // love.timer.getAverageDelta
+    // Timer Functions
     private static final LookupElement TIMER_GET_AVERAGE_DELTA =
             createElement("getAverageDelta", LoveTypes.FUNCTION);
 
-    // love.timer.getDelta
     private static final LookupElement TIMER_GET_DELTA =
             createElement("getDelta", LoveTypes.FUNCTION);
 
-    // love.timer.getFPS
     private static final LookupElement TIMER_GET_FPS =
             createElement("getFPS", LoveTypes.FUNCTION);
 
-    // love.timer.getMicroTime
     private static final LookupElement TIMER_GET_MICRO_TIME =
             createElement("getMicroTime", LoveTypes.FUNCTION);
 
-    // love.timer.getTime
     private static final LookupElement TIMER_GET_TIME =
             createElement("getTime", LoveTypes.FUNCTION);
 
-    // love.timer.sleep
     private static final LookupElement TIMER_SLEEP =
             createElement("sleep", LoveTypes.FUNCTION);
 
-    // love.timer.step
     private static final LookupElement TIMER_STEP =
             createElement("step", LoveTypes.FUNCTION);
 
@@ -1345,18 +1311,13 @@ public class LoveElements {
             TIMER_STEP
     );
 
-    // -------------------------------------------------------------------
-    // love.touch functions
-    // -------------------------------------------------------------------
-    // love.touch.getPosition
+    // Touch Functions
     private static final LookupElement TOUCH_GET_POSITION =
             createElement("getPosition", LoveTypes.FUNCTION);
 
-    // love.touch.getPressure
     private static final LookupElement TOUCH_GET_PRESSURE =
             createElement("getPressure", LoveTypes.FUNCTION);
 
-    // love.touch.getTouches
     private static final LookupElement TOUCH_GET_TOUCHES =
             createElement("getTouches", LoveTypes.FUNCTION);
 
@@ -1369,184 +1330,138 @@ public class LoveElements {
             TOUCH_GET_TOUCHES
     );
 
-    // -------------------------------------------------------------------
-    // love.video functions
-    // -------------------------------------------------------------------
-    // love.video.newVideoStream
+    // Video Functions
     private static final LookupElement VIDEO_NEW_VIDEO_STREAM =
             createElement("newVideoStream", LoveTypes.FUNCTION);
 
     /**
      * A List containing all video module functions.
      */
-    private static final List<LookupElement> LOVE_VIDEO_FUNCTIONS = Arrays.asList(
+    private static final List<LookupElement> LOVE_VIDEO_FUNCTIONS = List.of(
             VIDEO_NEW_VIDEO_STREAM
     );
 
-    // -------------------------------------------------------------------
-    // love.window functions
-    // -------------------------------------------------------------------
-    // love.window.close
+    // Window Functions
     private static final LookupElement WINDOW_CLOSE =
             createElement("close", LoveTypes.FUNCTION);
 
-    // love.window.fromPixels
     private static final LookupElement WINDOW_FROM_PIXELS =
             createElement("fromPixels", LoveTypes.FUNCTION);
 
-    // love.window.getDPIScale
     private static final LookupElement WINDOW_GET_DPI_SCALE =
             createElement("getDPIScale", LoveTypes.FUNCTION);
 
-    // love.window.getDesktopDimensions
     private static final LookupElement WINDOW_GET_DESKTOP_DIMENSIONS =
             createElement("getDesktopDimensions", LoveTypes.FUNCTION);
 
-    // love.window.getDimensions
     private static final LookupElement WINDOW_GET_DIMENSIONS =
             createElement("getDimensions", LoveTypes.FUNCTION);
 
-    // love.window.getDisplayCount
     private static final LookupElement WINDOW_GET_DISPLAY_COUNT =
             createElement("getDisplayCount", LoveTypes.FUNCTION);
 
-    // love.window.getDisplayName
     private static final LookupElement WINDOW_GET_DISPLAY_NAME =
             createElement("getDisplayName", LoveTypes.FUNCTION);
 
-    // love.window.getDisplayOrientation
     private static final LookupElement WINDOW_GET_DISPLAY_ORIENTATION =
             createElement("getDisplayOrientation", LoveTypes.FUNCTION);
 
-    // love.window.getFullscreen
     private static final LookupElement WINDOW_GET_FULLSCREEN =
             createElement("getFullscreen", LoveTypes.FUNCTION);
 
-    // love.window.getFullscreenModes
     private static final LookupElement WINDOW_GET_FULLSCREEN_MODES =
             createElement("getFullscreenModes", LoveTypes.FUNCTION);
 
-    // love.window.getHeight
     private static final LookupElement WINDOW_GET_HEIGHT =
             createElement("getHeight", LoveTypes.FUNCTION);
 
-    // love.window.getIcon
     private static final LookupElement WINDOW_GET_ICON =
             createElement("getIcon", LoveTypes.FUNCTION);
 
-    // love.window.getMode
     private static final LookupElement WINDOW_GET_MODE =
             createElement("getMode", LoveTypes.FUNCTION);
 
-    // love.window.getPixelScale
     private static final LookupElement WINDOW_GET_PIXEL_SCALE =
             createElement("getPixelScale", LoveTypes.FUNCTION);
 
-    // love.window.getPosition
     private static final LookupElement WINDOW_GET_POSITION =
             createElement("getPosition", LoveTypes.FUNCTION);
 
-    // love.window.getSafeArea
     private static final LookupElement WINDOW_GET_SAFE_AREA =
             createElement("getSafeArea", LoveTypes.FUNCTION);
 
-    // love.window.getTitle
     private static final LookupElement WINDOW_GET_TITLE =
             createElement("getTitle", LoveTypes.FUNCTION);
 
-    // love.window.getVSync
     private static final LookupElement WINDOW_GET_VSYNC =
             createElement("getVSync", LoveTypes.FUNCTION);
 
-    // love.window.getWidth
     private static final LookupElement WINDOW_GET_WIDTH =
             createElement("getWidth", LoveTypes.FUNCTION);
 
-    // love.window.hasFocus
     private static final LookupElement WINDOW_HAS_FOCUS =
             createElement("hasFocus", LoveTypes.FUNCTION);
 
-    // love.window.hasMouseFocus
     private static final LookupElement WINDOW_HAS_MOUSE_FOCUS =
             createElement("hasMouseFocus", LoveTypes.FUNCTION);
 
-    // love.window.isCreated
     private static final LookupElement WINDOW_IS_CREATED =
             createElement("isCreated", LoveTypes.FUNCTION);
 
-    // love.window.isDisplaySleepEnabled
     private static final LookupElement WINDOW_IS_DISPLAY_SLEEP_ENABLED =
             createElement("isDisplaySleepEnabled", LoveTypes.FUNCTION);
 
-    // love.window.isMaximized
     private static final LookupElement WINDOW_IS_MAXIMIZED =
             createElement("isMaximized", LoveTypes.FUNCTION);
 
-    // love.window.isMinimized
     private static final LookupElement WINDOW_IS_MINIMIZED =
             createElement("isMinimized", LoveTypes.FUNCTION);
 
-    // love.window.isOpen
     private static final LookupElement WINDOW_IS_OPEN =
             createElement("isOpen", LoveTypes.FUNCTION);
 
-    // love.window.isVisible
     private static final LookupElement WINDOW_IS_VISIBLE =
             createElement("isVisible", LoveTypes.FUNCTION);
 
-    // love.window.maximize
     private static final LookupElement WINDOW_MAXIMIZE =
             createElement("maximize", LoveTypes.FUNCTION);
 
-    // love.window.minimize
     private static final LookupElement WINDOW_MINIMIZE =
             createElement("minimize", LoveTypes.FUNCTION);
 
-    // love.window.requestAttention
     private static final LookupElement WINDOW_REQUEST_ATTENTION =
             createElement("requestAttention", LoveTypes.FUNCTION);
 
-    // love.window.restore
     private static final LookupElement WINDOW_RESTORE =
             createElement("restore", LoveTypes.FUNCTION);
 
-    // love.window.setDisplaySleepEnabled
     private static final LookupElement WINDOW_SET_DISPLAY_SLEEP_ENABLED =
             createElement("setDisplaySleepEnabled", LoveTypes.FUNCTION);
 
-    // love.window.setFullscreen
     private static final LookupElement WINDOW_SET_FULLSCREEN =
             createElement("setFullscreen", LoveTypes.FUNCTION);
 
-    // love.window.setIcon
     private static final LookupElement WINDOW_SET_ICON =
             createElement("setIcon", LoveTypes.FUNCTION);
 
-    // love.window.setMode
     private static final LookupElement WINDOW_SET_MODE =
             createElement("setMode", LoveTypes.FUNCTION);
 
-    // love.window.setPosition
     private static final LookupElement WINDOW_SET_POSITION =
             createElement("setPosition", LoveTypes.FUNCTION);
 
-    // love.window.setTitle
     private static final LookupElement WINDOW_SET_TITLE =
             createElement("setTitle", LoveTypes.FUNCTION);
 
-    // love.window.setVSync
     private static final LookupElement WINDOW_SET_VSYNC =
             createElement("setVSync", LoveTypes.FUNCTION);
 
-    // love.window.showMessageBox
     private static final LookupElement WINDOW_SHOW_MESSAGE_BOX =
             createElement("showMessageBox", LoveTypes.FUNCTION);
 
-    // love.window.toPixels
     private static final LookupElement WINDOW_TO_PIXELS =
             createElement("toPixels", LoveTypes.FUNCTION);
 
-    // love.window.updateMode
     private static final LookupElement WINDOW_UPDATE_MODE =
             createElement("updateMode", LoveTypes.FUNCTION);
 
@@ -1597,35 +1512,31 @@ public class LoveElements {
             WINDOW_UPDATE_MODE
     );
 
-    // -------------------------------------------------------------------
-    // 5) Central Map to Retrieve Items by Key (or everything at once)
-    // -------------------------------------------------------------------
-    /**
-     * A Map that stores all LookupElement lists categorized by their keys.
-     * Keys include:
-     *   - "callbacks" -> LOVE_CALLBACKS
-     *   - "modules"   -> LOVE_MODULES
-     *   - "audio"     -> LOVE_AUDIO_FUNCTIONS
-     *   - "data"      -> LOVE_DATA_FUNCTIONS
-     *   - "event"     -> LOVE_EVENT_FUNCTIONS
-     *   - "filesystem"-> LOVE_FILESYSTEM_FUNCTIONS
-     *   - "font"      -> LOVE_FONT_FUNCTIONS
-     *   - "graphics"  -> LOVE_GRAPHICS_FUNCTIONS
-     *   - "image"     -> LOVE_IMAGE_FUNCTIONS
-     *   - ... (add more as needed)
-     */
-    public static final Map<String, List<LookupElement>> LOVE_LOOKUP_MAP;
+    // Image Functions (continued)
+    private static final LookupElement IMAGE_NEW_IMAGE =
+            createElement("newImage", LoveTypes.FUNCTION);
 
+    /**
+     * A List containing all image module functions.
+     */
+    private static final List<LookupElement> LOVE_IMAGE_FUNCTIONS_LIST = Arrays.asList(
+            IMAGE_IS_COMPRESSED,
+            IMAGE_NEW_COMPRESSED_DATA,
+            IMAGE_NEW_ENCODED_IMAGE_DATA,
+            IMAGE_NEW_IMAGE_DATA
+    );
+
+    // Central Map Initialization
     static {
         Map<String, List<LookupElement>> map = new HashMap<>();
 
-        // Put callbacks under the "callbacks" key
+        // Callbacks
         map.put(LoveTypes.CALLBACKS_KEY, LOVE_CALLBACKS);
 
-        // Put all module names under the "modules" key
+        // Modules
         map.put(LoveTypes.MODULES_KEY, LOVE_MODULES);
 
-        // Put functions under their respective module keys
+        // Functions by module
         map.put(LoveTypes.AUDIO_KEY, LOVE_AUDIO_FUNCTIONS);
         map.put(LoveTypes.DATA_KEY, LOVE_DATA_FUNCTIONS);
         map.put(LoveTypes.EVENT_KEY, LOVE_EVENT_FUNCTIONS);
@@ -1650,9 +1561,24 @@ public class LoveElements {
         LOVE_LOOKUP_MAP = Collections.unmodifiableMap(map);
     }
 
-    // -------------------------------------------------------------------
-    // 6) Convenience Methods
-    // -------------------------------------------------------------------
+    /**
+     * Creates a LookupElement with consistent styling:
+     * - Bold text
+     * - Uses the LoveIcons.LOVE_ICON
+     * - Sets the given type text (e.g., "Callback", "Module", "Function")
+     *
+     * @param name     The display text of the completion item.
+     * @param typeText The type text (from LoveTypes) displayed alongside the item.
+     * @return A styled LookupElement.
+     */
+    private static LookupElement createElement(String name, String typeText) {
+        LookupElement element = LookupElementBuilder.create(name)
+                .bold()
+                .withTypeText(typeText)
+                .withIcon(LoveIcons.LOVE_ICON);
+
+        return PrioritizedLookupElement.withPriority(element, 1000);
+    }
 
     /**
      * Returns a list of all LookupElements across every entry in the map.

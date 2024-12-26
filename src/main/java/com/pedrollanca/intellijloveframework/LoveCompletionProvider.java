@@ -1,3 +1,24 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2024 - Pedro Chamorro Llanca
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package com.pedrollanca.intellijloveframework;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
@@ -11,10 +32,22 @@ import org.jetbrains.annotations.NotNull;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Provides custom code completion features for the IntelliJ Love Framework.
+ */
 public class LoveCompletionProvider extends CompletionProvider<CompletionParameters> {
-    // Regular expression to match lines starting with 'love.' or 'love.<module>.'
+    /**
+     * Regular expression to match lines starting with 'love.' or 'love.<module>.'.
+     */
     private static final Pattern LOVE_LINE_PATTERN = Pattern.compile("^\\s*love\\.(\\w*)\\.?$");
 
+    /**
+     * Adds completion suggestions based on the current context in the editor.
+     *
+     * @param completionParameters the parameters for code completion
+     * @param processingContext    the processing context
+     * @param completionResultSet  the result set to add completion elements to
+     */
     @Override
     protected void addCompletions(@NotNull CompletionParameters completionParameters,
                                   @NotNull ProcessingContext processingContext,
@@ -24,7 +57,6 @@ public class LoveCompletionProvider extends CompletionProvider<CompletionParamet
         Document document = editor.getDocument();
         int offset = completionParameters.getOffset();
 
-        // Get the text from the start of the line to the current cursor position
         int lineStartOffset = document.getLineStartOffset(document.getLineNumber(offset));
         String lineText = document.getText().substring(lineStartOffset, offset).trim();
 
@@ -34,20 +66,12 @@ public class LoveCompletionProvider extends CompletionProvider<CompletionParamet
             String moduleOrEmpty = matcher.group(1);
 
             if (moduleOrEmpty.isEmpty()) {
-                // User has typed 'love.'
-                // Suggest callbacks and modules
                 completionResultSet.addAllElements(LoveElements.getElementsFor(LoveTypes.CALLBACKS_KEY));
                 completionResultSet.addAllElements(LoveElements.getElementsFor(LoveTypes.MODULES_KEY));
             } else {
-                // User has typed 'love.<module>'
-                // Now, wait for the '.' to trigger function suggestions
-                // Since this method is triggered on '.', ensure that the last character is '.'
                 if (lineText.endsWith(".")) {
-                    // User has typed 'love.<module>.'
-                    // Suggest functions related to the module
                     completionResultSet.addAllElements(LoveElements.getElementsFor(moduleOrEmpty));
                 }
-                // Else, do not suggest anything (require full module name)
             }
         }
     }
