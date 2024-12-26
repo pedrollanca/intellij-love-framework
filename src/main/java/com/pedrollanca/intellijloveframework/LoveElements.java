@@ -1,5 +1,6 @@
 package com.pedrollanca.intellijloveframework;
 
+import com.intellij.codeInsight.completion.PrioritizedLookupElement;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 
@@ -22,10 +23,12 @@ public class LoveElements {
      * @return A styled LookupElement.
      */
     private static LookupElement createElement(String name, String typeText) {
-        return LookupElementBuilder.create(name)
+        LookupElement element = LookupElementBuilder.create(name)
                 .bold()
                 .withTypeText(typeText)
                 .withIcon(LoveIcons.LOVE_ICON);
+
+       return PrioritizedLookupElement.withPriority(element, 1000);
     }
 
     // -------------------------------------------------------------------
