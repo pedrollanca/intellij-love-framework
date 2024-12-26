@@ -21,17 +21,16 @@
 
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.pedrollanca.intellijloveframework</id>
-    <name></name>
-    <vendor>pedrollanca</vendor>
+    <id>com.github.pedrollanca.loveframeworksupport</id>
+    <name>Love Framework Support</name>
+    <vendor>Pedro Chamorro Llanca</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
-
     <!-- File type -->
     <extensions defaultExtensionNs="com.intellij">
-        <completion.contributor order="first" language="any" implementationClass="com.pedrollanca.intellijloveframework.LoveCompletionContributor"/>
+        <completion.contributor order="first" language="any"
+                                implementationClass="com.pedrollanca.loveframeworksupport.LoveCompletionContributor"/>
     </extensions>
 
 

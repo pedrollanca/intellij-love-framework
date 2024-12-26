@@ -19,24 +19,19 @@
  * SOFTWARE.
  */
 
-package com.pedrollanca.intellijloveframework;
+package com.pedrollanca.loveframeworksupport;
 
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionType;
-import com.intellij.lang.Language;
+import com.intellij.openapi.util.IconLoader;
 
-import static com.intellij.patterns.PlatformPatterns.psiElement;
+import javax.swing.*;
 
 /**
- * Provides custom code completion features for the IntelliJ Love Framework.
+ * Utility class for managing icons used in the IntelliJ Love Framework.
  */
-final public class LoveCompletionContributor extends CompletionContributor {
+public class LoveIcons {
 
     /**
-     * Initializes the LoveCompletionContributor by extending the BASIC completion type
-     * with the LoveCompletionProvider for any language.
+     * Represents the main Love Framework icon.
      */
-    LoveCompletionContributor() {
-        extend(CompletionType.BASIC, psiElement().withLanguage(Language.ANY), new LoveCompletionProvider());
-    }
+    public static final Icon LOVE_ICON = IconLoader.getIcon("/icons/loveicon.png", LoveIcons.class);
 }

@@ -1,7 +1,26 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# intellij-love-framework Changelog
+# Love Framework Support Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](http://keepachangelog.com/)
+and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+
+### Changed
+
+### Fixed
+
+## [1.0.0] - 2024-12-26
+
+### Added
+
+- Initial Release
+
+### Changed
+
+### Fixed
+

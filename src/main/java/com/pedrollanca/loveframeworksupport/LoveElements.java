@@ -19,7 +19,7 @@
  * SOFTWARE.
  */
 
-package com.pedrollanca.intellijloveframework;
+package com.pedrollanca.loveframeworksupport;
 
 import com.intellij.codeInsight.completion.PrioritizedLookupElement;
 import com.intellij.codeInsight.lookup.LookupElement;

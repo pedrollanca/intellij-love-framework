@@ -19,7 +19,7 @@
  * SOFTWARE.
  */
 
-package com.pedrollanca.intellijloveframework;
+package com.pedrollanca.loveframeworksupport;
 
 import java.util.List;
 

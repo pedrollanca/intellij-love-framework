@@ -6,12 +6,13 @@
 
 ## Overview
 
-**love-framework** is an IntelliJ IDEA plugin designed to enhance your development experience with
+**Love Framework Support** is an IntelliJ IDEA plugin designed to enhance your development experience with
 the [LÖVE](https://love2d.org/) framework for Lua. By providing intelligent autocompletion for LÖVE's extensive API,
 this plugin streamlines your coding workflow, reduces errors, and boosts productivity.
 
 <!-- Plugin description -->
-Love Framework is a simple plugin for IntelliJ IDEA that adds code completion for the LOVE 2D game engine. It offers
+Love Framework Support is a simple plugin for IntelliJ IDEA that adds code completion for the LOVE 2D game engine. It
+offers
 suggestions for LOVE modules, functions, and callbacks, helping you write game code more easily. This plugin aims to
 make developing LOVE 2D projects smoother and more efficient within IntelliJ.
 <!-- Plugin description end -->
@@ -29,19 +30,19 @@ make developing LOVE 2D projects smoother and more efficient within IntelliJ.
 
 ## Installation
 
-You can install **love-framework** using one of the following methods:
+You can install **Love Framework Support** using one of the following methods:
 
 ### **1. Using the IDE Built-in Plugin System:**
 
 1. Open IntelliJ IDEA.
 2. Navigate to <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd>.
-3. Search for "**love-framework**".
+3. Search for "**Love Framework Support**".
 4. Click <kbd>Install</kbd>.
 5. Restart the IDE if prompted.
 
 ### **2. Using JetBrains Marketplace:**
 
-1. Visit the [love-framework Plugin Page](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID).
+1. Visit the [Love Framework Support Plugin Page](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID).
 2. Click the <kbd>Install to ...</kbd> button. If your IDE is running, the plugin will be installed automatically.
 3. Alternatively, download the [latest release](https://github.com/pedrollanca/intellij-love-framework/releases/latest)
    and install it manually:
@@ -61,7 +62,7 @@ You can install **love-framework** using one of the following methods:
 
 ## Usage
 
-Once installed, **love-framework** enhances your Lua development within IntelliJ IDEA by providing intelligent
+Once installed, **Love Framework Support** enhances your Lua development within IntelliJ IDEA by providing intelligent
 autocompletion for the LÖVE framework.
 
 ### **Getting Started:**
@@ -130,8 +131,8 @@ The plugin includes a suite of tests to ensure reliability and functionality.
 ### **Running Tests:**
 
 1. Open the project in IntelliJ IDEA.
-2. Navigate to the `LoveElementsTest` class located in `src/test/java/com/pedrollanca/intellijloveframework/`.
-3. Right-click on the class and select <kbd>Run 'LoveElementsTest'</kbd>.
+2. Navigate to `src/test/java/com/pedrollanca/intellijloveframework/`.
+3. Right-click on the class and select <kbd>Run</kbd>.
 
 ## License
 
