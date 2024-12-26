@@ -24,10 +24,6 @@ make developing LOVE 2D projects smoother and more efficient within IntelliJ.
   - **Module-Specific Functions:** After selecting a module (e.g., `audio`) and typing `.`, only functions related to
     that module are suggested (e.g., `play`, `stop`).
 
-- **Seamless Integration:**
-  - **Supports Lua Files:** The plugin activates only within Lua files (`.lua`), ensuring that suggestions are relevant
-    and context-specific.
-
 - **Lightweight & Efficient:**
   - Designed to have minimal impact on IDE performance while providing robust autocompletion features.
 
@@ -94,15 +90,6 @@ The **love-framework** plugin is continuously evolving. Here are some planned en
 - **Documentation Integration:**
   - Provide inline documentation popups for functions and modules to offer immediate context and usage examples.
 
-- **Snippet Support:**
-  - Introduce code snippets for common LÖVE patterns to accelerate development.
-
-- **Error Detection:**
-  - Implement real-time error highlighting for common mistakes when using the LÖVE API.
-
-- **Customization Options:**
-  - Allow users to customize autocompletion settings, such as prioritizing certain modules or callbacks.
-
 - **Performance Optimization:**
   - Enhance the plugin's efficiency to ensure minimal impact on IDE performance, especially for large projects.
 
@@ -154,7 +141,5 @@ The plugin includes a suite of tests to ensure reliability and functionality.
 
 - [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template) – The foundation
   for building this plugin.
-- [EmmyLua](https://plugins.jetbrains.com/plugin/10896-emmylua) – For providing comprehensive Lua support within
-  IntelliJ IDEA.
 
 ---
