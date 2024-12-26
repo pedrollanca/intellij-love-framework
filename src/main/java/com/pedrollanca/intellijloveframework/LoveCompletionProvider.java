@@ -8,36 +8,47 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.util.ProcessingContext;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class LoveCompletionProvider extends CompletionProvider<CompletionParameters> {
+    // Regular expression to match lines starting with 'love.' or 'love.<module>.'
+    private static final Pattern LOVE_LINE_PATTERN = Pattern.compile("^\\s*love\\.(\\w*)\\.?$");
+
     @Override
-    protected void addCompletions(@NotNull CompletionParameters completionParameters, @NotNull ProcessingContext processingContext, @NotNull CompletionResultSet completionResultSet) {
+    protected void addCompletions(@NotNull CompletionParameters completionParameters,
+                                  @NotNull ProcessingContext processingContext,
+                                  @NotNull CompletionResultSet completionResultSet) {
 
         Editor editor = completionParameters.getEditor();
         Document document = editor.getDocument();
         int offset = completionParameters.getOffset();
 
-        CharSequence text = document.getCharsSequence();
+        // Get the text from the start of the line to the current cursor position
+        int lineStartOffset = document.getLineStartOffset(document.getLineNumber(offset));
+        String lineText = document.getText().substring(lineStartOffset, offset).trim();
 
-        String trigger = "love.";
-        String audio_module = "audio.";
-        // Ensure we don’t go out of bounds
-        if (offset >= trigger.length()) {
-            // Extract the substring of length 'trigger.length()' ending at offset
-            CharSequence recentText = text.subSequence(offset - trigger.length() - 1, offset).toString().trim();
+        Matcher matcher = LOVE_LINE_PATTERN.matcher(lineText);
 
-            // Compare to our trigger
-            if (trigger.contentEquals(recentText)) {
-                // If it matches, add your completions
+        if (matcher.matches()) {
+            String moduleOrEmpty = matcher.group(1);
+
+            if (moduleOrEmpty.isEmpty()) {
+                // User has typed 'love.'
+                // Suggest callbacks and modules
                 completionResultSet.addAllElements(LoveElements.getElementsFor(LoveTypes.CALLBACKS_KEY));
-                completionResultSet.addAllElements(LoveElements.getElementsFor(LoveTypes.MODULES_KEY
-                ));
-            }
-
-            if (audio_module.contentEquals(recentText)) {
-                completionResultSet.addAllElements(LoveElements.getElementsFor(LoveTypes.AUDIO_KEY));
-
+                completionResultSet.addAllElements(LoveElements.getElementsFor(LoveTypes.MODULES_KEY));
+            } else {
+                // User has typed 'love.<module>'
+                // Now, wait for the '.' to trigger function suggestions
+                // Since this method is triggered on '.', ensure that the last character is '.'
+                if (lineText.endsWith(".")) {
+                    // User has typed 'love.<module>.'
+                    // Suggest functions related to the module
+                    completionResultSet.addAllElements(LoveElements.getElementsFor(moduleOrEmpty));
+                }
+                // Else, do not suggest anything (require full module name)
             }
         }
-
     }
 }
