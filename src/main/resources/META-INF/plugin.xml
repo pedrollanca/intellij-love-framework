@@ -29,7 +29,7 @@
 
     <!-- File type -->
     <extensions defaultExtensionNs="com.intellij">
-        <completion.contributor order="first" language="any"
+        <completion.contributor order="last" language="any"
                                 implementationClass="com.pedrollanca.loveframeworksupport.LoveCompletionContributor"/>
     </extensions>
 
