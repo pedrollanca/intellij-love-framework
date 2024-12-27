@@ -31,12 +31,18 @@ import static com.intellij.patterns.PlatformPatterns.psiElement;
  * Provides custom code completion features for the IntelliJ Love Framework.
  */
 final public class LoveCompletionContributor extends CompletionContributor {
-
-    /**
-     * Initializes the LoveCompletionContributor by extending the BASIC completion type
-     * with the LoveCompletionProvider for any language.
-     */
     LoveCompletionContributor() {
-        extend(CompletionType.BASIC, psiElement().withLanguage(Language.ANY), new LoveCompletionProvider());
+
+        Language luaLanguage = PluginUtils.getLuaLanguage();
+        if (luaLanguage != null) {
+            extend(
+                    CompletionType.BASIC,
+                    psiElement().withLanguage(luaLanguage),
+                    new LoveCompletionProvider()
+            );
+        } else {
+            extend(CompletionType.BASIC, psiElement().withLanguage(Language.ANY), new LoveCompletionProvider());
+        }
+
     }
 }
