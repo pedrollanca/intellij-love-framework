@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- Adding support for upcoming 251 platform version
+
 ## [1.0.1] - 2024-12-27
 
 ### Fixed
