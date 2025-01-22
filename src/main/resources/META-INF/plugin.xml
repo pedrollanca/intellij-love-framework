@@ -32,6 +32,12 @@
         <completion.contributor order="last" language="any"
                                 implementationClass="com.pedrollanca.loveframeworksupport.LoveCompletionContributor"/>
     </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.documentationProvider language="Lua" implementationClass="com.pedrollanca.loveframeworksupport.LoveDocumentationProvider"/>
+    </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.annotator language="Lua" implementationClass="com.pedrollanca.loveframeworksupport.LoveKeywordHighlighter"/>
+    </extensions>
 
 
 </idea-plugin>
