@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.1.0] - 2025-08-15
+
 - Update plugin compatibility to support 252
 - Added basic hover documentation with links to official website (requires EmmyLua)
 
@@ -23,6 +26,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Compatibility with EmmyLua
 
-[Unreleased]: https://github.com/pedrollanca/intellij-love-framework/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/pedrollanca/intellij-love-framework/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/pedrollanca/intellij-love-framework/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/pedrollanca/intellij-love-framework/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/pedrollanca/intellij-love-framework/commits/v1.0.1
