@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+- Update plugin compatibility to support 252
+- Added basic hover documentation with links to official website (requires EmmyLua)
 
 ## [1.0.2] - 2025-01-22
 
