@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Upgrade IntelliJ Platform Gradle Plugin to 2.18.1, Gradle to 9.7.1, Kotlin to 2.2.21 and foojay-resolver to 1.0.0
 - Build against IntelliJ Platform 2025.2 and raise JVM toolchain to Java 21
 - Raise minimum supported build to 242 (2024.2)
+
+## [1.1.0] - 2025-08-15
+
 - Update plugin compatibility to support 252
 - Added basic hover documentation with links to official website (requires EmmyLua)
 
@@ -29,6 +32,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Compatibility with EmmyLua
 
-[Unreleased]: https://github.com/pedrollanca/intellij-love-framework/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/pedrollanca/intellij-love-framework/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/pedrollanca/intellij-love-framework/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/pedrollanca/intellij-love-framework/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/pedrollanca/intellij-love-framework/commits/v1.0.1
