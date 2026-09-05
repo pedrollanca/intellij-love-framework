@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-09-05
+
 - Build against IntelliJ Platform 2026.2 and raise the Java toolchain to Java 25
 - Update plugin compatibility to support 262
 - Upgrade IntelliJ Platform Gradle Plugin to 2.18.1, Gradle to 9.7.1, Kotlin to 2.2.21 and foojay-resolver to 1.0.0
@@ -32,7 +34,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Compatibility with EmmyLua
 
-[Unreleased]: https://github.com/pedrollanca/intellij-love-framework/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/pedrollanca/intellij-love-framework/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/pedrollanca/intellij-love-framework/compare/v1.1.0...v1.3.0
 [1.1.0]: https://github.com/pedrollanca/intellij-love-framework/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/pedrollanca/intellij-love-framework/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/pedrollanca/intellij-love-framework/commits/v1.0.1
