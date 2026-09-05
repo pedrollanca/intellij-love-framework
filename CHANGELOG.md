@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- Build against IntelliJ Platform 2025.2 and raise JVM toolchain to Java 21
+- Raise minimum supported build to 242 (2024.2)
 ## [1.1.0] - 2025-08-15
 
 - Update plugin compatibility to support 252
