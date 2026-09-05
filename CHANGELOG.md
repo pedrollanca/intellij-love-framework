@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+- Build against IntelliJ Platform 2025.2 and raise JVM toolchain to Java 21
+- Raise minimum supported build to 242 (2024.2)
 - Update plugin compatibility to support 252
 - Added basic hover documentation with links to official website (requires EmmyLua)
 
