@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- Build against IntelliJ Platform 2026.2 and raise the Java toolchain to Java 25
+- Update plugin compatibility to support 262
+- Upgrade IntelliJ Platform Gradle Plugin to 2.18.1, Gradle to 9.7.1, Kotlin to 2.2.21 and foojay-resolver to 1.0.0
 - Build against IntelliJ Platform 2025.2 and raise JVM toolchain to Java 21
 - Raise minimum supported build to 242 (2024.2)
 - Update plugin compatibility to support 252
