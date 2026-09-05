@@ -36,8 +36,18 @@ group = providers.gradleProperty("pluginGroup").get()
 version = providers.gradleProperty("pluginVersion").get()
 
 // Set the JVM language level used to build the project.
+// IntelliJ Platform 2026.2 ships Java 25 (class file version 69), so the Java sources must be
+// compiled with a JDK 25 toolchain to be able to read the platform classes.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+// Kotlin does not yet support a JVM target of 25, so keep the Kotlin toolchain at 24.
+// The project has no Kotlin sources, so this only affects the generated plugin manifest metadata.
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(24)
 }
 
 // Configure project's dependencies
@@ -57,7 +67,10 @@ dependencies {
 
     // IntelliJ Platform Gradle Plugin Dependencies Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-dependencies-extension.html
     intellijPlatform {
-        create(providers.gradleProperty("platformType"), providers.gradleProperty("platformVersion"))
+        create(providers.gradleProperty("platformType"), providers.gradleProperty("platformVersion")) {
+            // EAP/snapshot and some released builds are resolved from the Maven repositories (non-installer).
+            useInstaller = false
+        }
 
         // Plugin Dependencies. Uses `platformBundledPlugins` property from the gradle.properties file for bundled IntelliJ Platform plugins.
         bundledPlugins(providers.gradleProperty("platformBundledPlugins").map { it.split(',') })
